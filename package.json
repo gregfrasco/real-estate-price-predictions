@@ -1,0 +1,14 @@
+{
+  "name": "real-estate-price-predictions",
+  "version": "1.0.0",
+  "scripts": {
+    "gunicorn": "gunicorn --chdir server app:app",
+    "build": "cd client && npm run build",
+    "postinstall": "pip install -r requirements.txt"
+  },
+  "dependencies": {},
+  "cacheDirectories": [
+    "node_modules",
+    "react/node_modules"
+  ]
+}

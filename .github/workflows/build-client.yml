@@ -1,0 +1,23 @@
+# This workflow will run basic checks
+name: Client
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install Dependencies (NPM)
+        run: npm i
+      - name: Check Types (Typescript Compiler)
+        run: npm run tsc
+      - name: Web Build
+        run: npm run build

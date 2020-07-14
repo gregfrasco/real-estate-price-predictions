@@ -5,7 +5,7 @@
   "scripts": {
     "gunicorn": "gunicorn --chdir server app:app",
     "build": "cd client && npm install && npm run build",
-    "postinstall": "pip install -r server/requirements.txt"
+    "postinstall": "pip install -r requirements.txt"
   },
   "engines": {
     "node": "0.12"

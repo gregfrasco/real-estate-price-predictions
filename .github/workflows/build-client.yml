@@ -18,9 +18,6 @@ jobs:
       - name: Install Dependencies (NPM)
         run: npm i
         working-directory: ./client
-      - name: Check Types (Typescript Compiler)
-        run: npm run tsc
-        working-directory: ./client
       - name: Web Build
         run: npm run build
         working-directory: ./client

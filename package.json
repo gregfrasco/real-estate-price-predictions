@@ -4,8 +4,8 @@
   "description": "This package.json file is for heroku deployment only",
   "scripts": {
     "gunicorn": "gunicorn --chdir server app:app",
-    "build": "cd client && npm install && npm run build",
-    "postinstall": "pip install -r requirements.txt"
+    "build": "cd client && npm run build",
+    "postinstall": "npm install --prefix client"
   },
   "engines": {
     "node": "0.12"

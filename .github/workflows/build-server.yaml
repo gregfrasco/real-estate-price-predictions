@@ -1,5 +1,5 @@
 # This workflow will run basic checks
-name: Client
+name: Server
 
 on:
   push:

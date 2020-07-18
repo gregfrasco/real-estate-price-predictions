@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api';
 import { Card } from '@material-ui/core';
 import mapStyle from './mapStyle.json';
 import { useFlip } from '../../context/flip.context';
+import { Home } from '../home';
 
 const center = {
   lat: 42.3551282,
@@ -15,15 +16,23 @@ const containerStyle = {
 };
 
 const Map: FC = () => {
-  const { homes } = useFlip();
+  const { homes, flip, setFlip } = useFlip();
   const [markers, setMakers] = useState();
   useEffect(() => {
     setMakers(
       homes.map(h => {
-        return <Marker key={h.MLSNUM} position={h.location} />;
+        return (
+          <Marker key={h.MLSNUM} position={h.location} onClick={() => setFlip(h)}>
+            {flip && flip.MLSNUM === h.MLSNUM && (
+              <InfoWindow>
+                <Home />
+              </InfoWindow>
+            )}
+          </Marker>
+        );
       })
     );
-  }, [homes, setMakers]);
+  }, [flip, homes, setMakers]);
   return (
     <Card style={{ flex: 1 }}>
       <LoadScript googleMapsApiKey="AIzaSyAftwrvS2Mphv821bXwZMOR3EmC6esH8Fk">

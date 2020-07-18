@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useState, Fragment } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api';
-import { Button, Card } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 import mapStyle from './mapStyle.json';
 import { useFlip } from '../../context/flip.context';
 import { Home } from '../home';
@@ -32,7 +32,7 @@ const Map: FC = () => {
         );
       })
     );
-  }, [flip, homes, setMakers]);
+  }, [flip, setFlip, homes, setMakers]);
   return (
     <Card style={{ flex: 1 }}>
       <LoadScript googleMapsApiKey="AIzaSyAftwrvS2Mphv821bXwZMOR3EmC6esH8Fk">

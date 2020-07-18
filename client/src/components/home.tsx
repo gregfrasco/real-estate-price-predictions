@@ -11,8 +11,6 @@ const convertPrice = (price: number): string => {
   return `$${Math.floor(price / 1000)}k`;
 };
 
-const color = { color: '#aaa' };
-
 interface HomeProps {
   viewHome?: boolean;
 }
@@ -40,14 +38,16 @@ const Home: FC<HomeProps> = ({ viewHome }) => {
             <Typography variant="h6">{flip.ADDRESS}</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography style={color}>
-              <RoomOutlined fontSize="small" style={color} />
+            <Typography color="secondary">
+              <RoomOutlined fontSize="small" color="secondary" />
               {flip.CITY}
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography style={{ textAlign: 'end' }} color="primary">
-              <span style={color}>Listed At </span>
+              <Typography component="span" color="secondary">
+                Listed At{' '}
+              </Typography>
               {convertPrice(flip.LISTPRICE)}
             </Typography>
           </Grid>

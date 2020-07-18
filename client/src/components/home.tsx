@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { Card, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
 import { useFlip } from '../context/flip.context';
 import { RoomOutlined } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 
 const convertPrice = (price: number): string => {
   if (price > 1000000) {
@@ -12,8 +13,13 @@ const convertPrice = (price: number): string => {
 
 const color = { color: '#aaa' };
 
-const Home: FC = () => {
+interface HomeProps {
+  viewHome?: boolean;
+}
+
+const Home: FC<HomeProps> = ({ viewHome }) => {
   const { flip } = useFlip();
+  const history = useHistory();
   if (!flip) {
     return null;
   }
@@ -47,6 +53,19 @@ const Home: FC = () => {
           </Grid>
         </Grid>
       </CardContent>
+      {viewHome && (
+        <CardActions>
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => {
+              history.push('/flip');
+            }}
+          >
+            View Home
+          </Button>
+        </CardActions>
+      )}
     </Card>
   );
 };

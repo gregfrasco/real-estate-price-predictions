@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, Fragment } from 'react';
 import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api';
-import { Card } from '@material-ui/core';
+import { Button, Card } from '@material-ui/core';
 import mapStyle from './mapStyle.json';
 import { useFlip } from '../../context/flip.context';
 import { Home } from '../home';
@@ -25,7 +25,7 @@ const Map: FC = () => {
           <Marker key={h.MLSNUM} position={h.location} onClick={() => setFlip(h)}>
             {flip && flip.MLSNUM === h.MLSNUM && (
               <InfoWindow>
-                <Home />
+                <Home viewHome />
               </InfoWindow>
             )}
           </Marker>

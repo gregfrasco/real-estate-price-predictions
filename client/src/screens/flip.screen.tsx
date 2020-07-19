@@ -4,7 +4,6 @@ import { Container, Grid } from '@material-ui/core';
 import { Home } from '../components/home';
 import { HomeSpecification } from '../components/home-specification';
 import { HomeDescription } from '../components/home-description';
-import { HomePrice } from '../components/home-price';
 import { FlipProbability } from '../components/flip-probability';
 
 const FlipScreen: FC = () => {

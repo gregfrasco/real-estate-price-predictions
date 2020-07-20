@@ -20,11 +20,12 @@ The goal of this project is to find and analyze houses on the market, determine 
 
 ### Frontend Application
 
-| Milestone                                                       | Leader | Estimated Time | Status  |
-|-----------------------------------------------------------------|--------|----------------|---------|
-| Wireframe Application Design                                    | TBD    | 1 week         | Planned |
-| Develop Listing out a listing view with post renovation prices. | TBD    | 1.5 weeks      | Planned |
-| Build a listing view to find help find homes to renovate.       | TBD    | 1.5 weeks      | Planned |
+| Milestone                    | Leader         | Estimated Time | Status      |
+|------------------------------|----------------|----------------|-------------|
+| Wireframe Application Design | Enrique        | 1 week         | Completed   |
+| Flip View Page               | Greg & Enrique | 1.5 weeks      | In Progress |
+| Flip Listing Page            | Greg & Enrique | 1.5 weeks      | In Progress |
+
 
 ### Backend Application
 
@@ -34,6 +35,15 @@ The goal of this project is to find and analyze houses on the market, determine 
 | Build a RESTful api with stub data to start integration with the frontend             | TBD    | 1 week         | Planned |
 | Integrate backend with model and data.                                                | TBD    | 1 week         | Planned |
 | Deploy Application to AWS.                                                            | TBD    | 1 week         | Planned |
+
+
+## Project Updates
+
+### Wireframes
+
+| **Map View** | **Listing View** |
+|----------|--------------|
+| ![Wireframe of a flip listing page](https://user-images.githubusercontent.com/5147346/87996092-45648000-cabf-11ea-8b77-a347f36e26cb.png) | ![Wireframe of a flip listing page](https://user-images.githubusercontent.com/5147346/87996239-8ceb0c00-cabf-11ea-9151-24cc19a855f7.png) |
 
 ## Team Members
 

@@ -14,9 +14,9 @@ The goal of this project is to find and analyze houses on the market, determine 
 
 | Milestone                                                                        | Leader | Estimated Time | Status    |
 |----------------------------------------------------------------------------------|--------|----------------|-----------|
-| Cleaning Data                                                                    | TBD    | 1 week         | Planned   |
-| Classify houses that have been bought and sold in a relatively short time period | Nina   | 1 week         | Completed |
-| Optimize the model for better results and produce a flip score                   | TBD    | 1.5 weeks      | Planned   |
+| Cleaning Data                                                                    | Nina + Bry    | 1 week         | In Progress   |
+| Classify houses that have been bought and sold in a relatively short time period | Greg + Nina   | 1 week         | Completed |
+| Optimize the model for better results and produce a flip score                   | Nina    | 1.5 weeks      | Planned   |
 
 ### Frontend Application
 

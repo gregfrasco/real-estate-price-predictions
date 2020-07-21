@@ -43,9 +43,31 @@ Our team has created a [team charter](https://github.com/gregfrasco/real-estate-
 
 ## Machine Learning Model
 
+For this milestone, we include two untuned models that performed best with our data. Much of the work so far has been dedicated to cleaning data and learning more about it.
+
+There's lots of cataloging of the process in our basic_model notebook since it's easier to document in context. We'll include a high-level overview here.
+
 ### Data Cleaning
 
-We have found some errors with the MLS dataset such as Listing have negtitive ages or columns miss-aligned. Given working with a limited set of flipped homes in the data. We are going to make the effort on updating this dataset in hope to improve our model.
+We found some errors in the MLS dataset (ex having negative ages or lot sizes given in both acres and square feet). Given that we're working with a limited set of flipped homes in the data, we're going to make the effort to clean up this data where possible. This effort is in progress.
+
+We removed condos from our data for now, because it was difficult to match on address to identify flips (conds unit data is not great, and it's going to take a lot of extra work to include single and multi family building that were condoized into our data, though this would be very valuable).
+
+### Variable Selection
+
+We cleaned most of the continuous variables for this milestone. For the next one, we'd like to play with including several categorical variables to our data set to see if any improve the model. The most interesting ones to us at the moment are number of photos included in the listing (fixer uppers anecdotally include fewer photos, so this may be a great predictor), property type, and potentially zip code (we imagine some areas are more likely to have flips than others).
+
+We also performed PCA to help guide variable selection, and in the next iteration will try the model with fewer variables to see if accuracy improves (and remove some of the issues caused by strongly correlated predictors...). We are also going to try log-transforming some of the coontinuous variables, namely price, to see if that helps better separate the data.
+
+### Model Selection
+
+We ran the basic untransformed data through a series of classification models including logistic regression, decision tree classifier, LDA and QDA, KNN, SVM, several boosting algorithms, random forest, and bagging. The idea was to see which models worked well with our data and set us up to be able to quickly run many models with different combinations of transformed and untransformed predictors.
+
+Decision trees and random forest performed best, followed by KNN with 3 neighbors. The next step will be tuning and improving parameters with gridsearch, combining approaches, applying better cv techniques like bootstrap, and trying approaches known to work on imbalanced data like SMOTE. Should be a "breeze" ;).
+
+### Listing Descriptions and Photos
+
+We'd also like to improve the accuracy of our classifier by learning from the listing descriptions and (if there's time) from the listing images themselves. We will work on including that in the next two weeks!
 
 ## Frontend Application
 

@@ -39,6 +39,8 @@ The goal of this project is to find and analyze houses on the market, determine 
 
 # Project Updates
 
+Our team has created a [team charter](https://github.com/gregfrasco/real-estate-price-predictions/blob/master/documents/team_charter.md).This document was developed in a group setting that clarifies team direction, communication, and how to work together. Investing the required time to develop this charter has reduced confusion about the group’s workflow and reducing the risk of rework.
+
 ## Machine Learning Model
 
 ### Data Cleaning

@@ -9,16 +9,18 @@ import { Box, Container, Grid } from '@material-ui/core';
 const HomesScreen: FC = () => {
   return (
     <Fragment>
-      <Header title={'Flips for Sale'} />
+      <Box paddingBottom={4}>
+        <Header title={'Flips for Sale'} />
+      </Box>
       <Container>
         <Grid container direction="row" justify="space-between" alignItems="flex-start">
-          <Grid container item xs={4} spacing={3}>
-            <Box paddingTop={5} width="100%">
+          <Grid container item xs={5} spacing={2}>
+            <Box width="100%">
               <ListingsContainer />
             </Box>
           </Grid>
-          <Grid container item xs={8} spacing={3}>
-            <Map />
+          <Grid container item xs={7} spacing={2}>
+              <Map />
           </Grid>
         </Grid>
       </Container>

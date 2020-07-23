@@ -5,6 +5,13 @@ import { RoomOutlined } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 
+const convertPrice = (price: number): string => {
+  if (price > 1000000) {
+    return `$${(price / 1000000).toFixed(1)}m`;
+  }
+  return `$${Math.floor(price / 1000)}k`;
+};
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -22,49 +29,61 @@ const useStyles = makeStyles({
   },
 });
 
-// const theme = createMuiTheme({
-//   palette: {
-//     primary: blue,
-//   },
-// });
-
 interface ListingProps {
-  // MLSNUM: number;
-  // STATUS: string;
+  MLSNUM: number;
   LISTPRICE: number;
-  // SOLDPRICE?: number | null;
-  // LISTDATE: string;
-  // ADDRESS: string;
-  // CITY: string;
-  // STATE: string;
-  // ZIP: number;
-  // BEDS: number;
-  // BATHS: number;
-  // SQFT: number;
-  // AGE: number;
-  // LOTSIZE?: number | null;
+  ADDRESS: string;
+  CITY: string;
+  PHOTOURL: string;
+  BEDS: number;
+  BATHS: number;
+  SQFT: number;
 }
-// const ListingProps
 
-const Listing: FC<ListingProps> = ({ LISTPRICE }) => {
+const Listing: FC<ListingProps> = ({
+  PHOTOURL,
+  MLSNUM,
+  LISTPRICE,
+  ADDRESS,
+  CITY,
+  BEDS,
+  BATHS,
+  SQFT
+  }) => {
   const classes = useStyles();
 
   return (
-
       <Card className={classes.root}>
-        <Box  bgcolor="warning.main">
-          <CardContent>
-            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                Houses
-            </Typography>
-            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                {LISTPRICE}
-            </Typography>
-            <CardActions>
-              <Button variant="contained" color="primary">Learn More</Button>
-            </CardActions>
-          </CardContent>
-        </Box>
+        <Grid container>
+          <Grid item xs={4}>
+            <CardMedia
+              component="img"
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+              src={PHOTOURL}
+              title={ADDRESS}
+            />
+          </Grid>
+          <Grid item xs={8}>
+            <CardContent>
+              <Typography className={classes.title} variant="h6" gutterBottom>
+                {ADDRESS}
+              </Typography>
+              <Typography color="secondary">
+                <RoomOutlined fontSize="small" color="secondary" />
+                {CITY}
+              </Typography>
+              <Typography color="textPrimary" gutterBottom>
+                {convertPrice(LISTPRICE)}
+              </Typography>
+              <Typography className={classes.title} gutterBottom>
+                {BEDS} Beds, {BATHS} Baths, {SQFT} SQFT
+              </Typography>
+            </CardContent>
+          </Grid>
+        </Grid>
       </Card>
   );
 };

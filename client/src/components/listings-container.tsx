@@ -7,10 +7,18 @@ import { Listing } from '../components/listing';
 const ListingsContainer: FC = () => {
   const { homes, flip, setFlip } = useFlip();
   const listings = homes.map((home) =>
-    //aqui pondria Listing con sus props
-    // <Listing key={home.MLSNUM} MLSNUM={home.MLSNUM} LISTPRICE={home.LISTPRICE} CITY={home.CITY} />
-    <Box paddingTop={1}>
-      <Listing key={home.MLSNUM} LISTPRICE={home.LISTPRICE} />
+    <Box paddingBottom={1}>
+      <Listing
+        key={home.MLSNUM}
+        PHOTOURL={home.PHOTOURL}
+        MLSNUM={home.MLSNUM}
+        LISTPRICE={home.LISTPRICE}
+        ADDRESS={home.ADDRESS}
+        CITY={home.CITY}
+        BEDS={home.BEDS}
+        BATHS={home.BATHS}
+        SQFT={home.SQFT}
+      />
     </Box>
   );
   return (

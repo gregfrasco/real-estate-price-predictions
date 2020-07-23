@@ -1,61 +1,71 @@
 import React, { FC } from 'react';
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
 import { useFlip } from '../context/flip.context';
 import { RoomOutlined } from '@material-ui/icons';
-// import { useHistory } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 
-const convertPrice = (price: number): string => {
-  if (price > 1000000) {
-    return `$${(price / 1000000).toFixed(1)}m`;
-  }
-  return `$${Math.floor(price / 1000)}k`;
-};
 
-// interface ListingProps {
-//   flip?: Listing;
-// }
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
-// const Listing: FC<ListingProps> = ({ flip }) => {
-const Listing: FC = () => {
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: blue,
+//   },
+// });
 
-  const { flip } = useFlip();
-  // const history = useHistory();
-  if (!flip) {
-    return null;
-  }
+interface ListingProps {
+  // MLSNUM: number;
+  // STATUS: string;
+  LISTPRICE: number;
+  // SOLDPRICE?: number | null;
+  // LISTDATE: string;
+  // ADDRESS: string;
+  // CITY: string;
+  // STATE: string;
+  // ZIP: number;
+  // BEDS: number;
+  // BATHS: number;
+  // SQFT: number;
+  // AGE: number;
+  // LOTSIZE?: number | null;
+}
+// const ListingProps
+
+const Listing: FC<ListingProps> = ({ LISTPRICE }) => {
+  const classes = useStyles();
+
   return (
-    <Card>
-      <CardMedia
-        component="img"
-        style={{
-          width: '100%',
-          height: '150px'
-        }}
-        src={flip.PHOTOURL}
-        title={flip.ADDRESS}
-      />
-      <CardContent>
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography variant="h6">{flip.ADDRESS}</Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography color="secondary">
-              <RoomOutlined fontSize="small" color="secondary" />
-              {flip.CITY}
+
+      <Card className={classes.root}>
+        <Box  bgcolor="warning.main">
+          <CardContent>
+            <Typography className={classes.title} color="textSecondary" gutterBottom>
+                Houses
             </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography style={{ textAlign: 'end' }} color="primary">
-              <Typography component="span" color="secondary">
-                Listed At{' '}
-              </Typography>
-              {convertPrice(flip.LISTPRICE)}
+            <Typography className={classes.title} color="textSecondary" gutterBottom>
+                {LISTPRICE}
             </Typography>
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+            <CardActions>
+              <Button variant="contained" color="primary">Learn More</Button>
+            </CardActions>
+          </CardContent>
+        </Box>
+      </Card>
   );
 };
 

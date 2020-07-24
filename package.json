@@ -10,9 +10,5 @@
   "engines": {
     "node": "12.x"
   },
-  "dependencies": {},
-  "cacheDirectories": [
-    "node_modules",
-    "client/node_modules"
-  ]
+  "dependencies": {}
 }

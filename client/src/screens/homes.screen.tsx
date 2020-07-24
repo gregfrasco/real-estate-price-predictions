@@ -2,7 +2,6 @@ import React, { FC, Fragment } from 'react';
 import { Header } from '../components/header';
 import { Map } from '../components/map/map';
 import { ListingsContainer } from '../components/listings-container';
-import { ListingCard } from '../components/listingCard';
 import { Box, Container, Grid } from '@material-ui/core';
 
 

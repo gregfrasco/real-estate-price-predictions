@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useState, Fragment } from 'react';
-import { Box, Card, Typography } from '@material-ui/core';
+import React, { FC } from 'react';
+import { Box } from '@material-ui/core';
 import { useFlip } from '../context/flip.context';
 import { ListingCard } from '../components/listingCard';
 
 
 const ListingsContainer: FC = () => {
-  const { homes, flip, setFlip } = useFlip();
+  const { homes } = useFlip();
   const listings = homes.map((home) =>
     <Box paddingBottom={1}>
       <ListingCard

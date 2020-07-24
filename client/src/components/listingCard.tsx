@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
-import { useFlip } from '../context/flip.context';
+import { Card, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
 import { RoomOutlined } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 

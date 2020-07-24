@@ -30,26 +30,20 @@ const useStyles = makeStyles({
 });
 
 interface ListingProps {
-  MLSNUM: number;
-  LISTPRICE: number;
-  ADDRESS: string;
-  CITY: string;
-  PHOTOURL: string;
-  BEDS: number;
-  BATHS: number;
-  SQFT: number;
+  listing: Listing
 }
 
-const Listing: FC<ListingProps> = ({
-  PHOTOURL,
-  MLSNUM,
-  LISTPRICE,
-  ADDRESS,
-  CITY,
-  BEDS,
-  BATHS,
-  SQFT
-  }) => {
+const ListingCard: FC<ListingProps> = ({
+  listing: {
+    PHOTOURL,
+    MLSNUM,
+    LISTPRICE,
+    ADDRESS,
+    CITY,
+    BEDS,
+    BATHS,
+    SQFT
+  }}) => {
   const classes = useStyles();
 
   return (
@@ -88,4 +82,4 @@ const Listing: FC<ListingProps> = ({
   );
 };
 
-export { Listing };
+export { ListingCard };

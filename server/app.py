@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from os import environ
 from dotenv import load_dotenv
 from models.listing import Db, Listing
@@ -15,10 +15,12 @@ Db.init_app(app)
 def index():
     return app.send_static_file('index.html')
 
-@app.route('/api/listing/<str:city>')
+@app.route('/api/listings/<city>')
 def getListingsByCity(city):
-    return []
+    city_listings = Listing.query.filter_by(CITY=city).all()
+    return jsonify([listing.to_dict() for listing in city_listings])
 
-@app.route('/api/predict/<num:mls>')
+@app.route('/api/predict/<int:mls>')
 def predictFlip(mls):
-    return 75
+    listing = Listing.query.filter(MLSNUM=mls).one()
+    return jsonify({'score': 75})

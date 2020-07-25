@@ -47,3 +47,9 @@ class Listing(Db.Model):
     zoMLSNUM = Db.Column(Db.Integer, nullable=True)
     lat = Db.Column(Db.Float, nullable=True)
     lng = Db.Column(Db.Float, nullable=True)
+
+    def to_dict(self):
+        listing = self.__dict__
+        if '_sa_instance_state' in listing:
+            del listing['_sa_instance_state']
+        return listing

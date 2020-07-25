@@ -29,5 +29,5 @@ def predictFlip(mls):
     x = []
     for col in columns:
         x.append(listing[col])
-    print(x)
-    return jsonify({'score': 75})
+    res = model.predict_proba([x])[0]
+    return jsonify({'score': res[1] * 100})

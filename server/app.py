@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from models.listing import Db, Listing
 import joblib
 
-model = joblib.load('./notebooks/rf_untuned.pkl')
+model = joblib.load('./model.pkl')
 columns = ['SOLDPRICE', 'DOM', 'BEDS', 'BATHS', 'SQFT', 'AGE', 'GARAGE']
 load_dotenv('.env')
 

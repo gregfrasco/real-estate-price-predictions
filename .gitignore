@@ -2,3 +2,5 @@ notebooks/__pycache__
 notebooks/.ipynb_checkpoints
 server/__pycache__
 .DS_Store
+.env
+server/models/__pycache__

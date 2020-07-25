@@ -2,7 +2,10 @@ from flask import Flask, jsonify
 from os import environ
 from dotenv import load_dotenv
 from models.listing import Db, Listing
+import joblib
 
+model = joblib.load('./notebooks/rf_untuned.pkl')
+columns = ['SOLDPRICE', 'DOM', 'BEDS', 'BATHS', 'SQFT', 'AGE', 'GARAGE']
 load_dotenv('.env')
 
 app = Flask(__name__, static_folder='../client/build', static_url_path='/')
@@ -22,5 +25,9 @@ def getListingsByCity(city):
 
 @app.route('/api/predict/<int:mls>')
 def predictFlip(mls):
-    listing = Listing.query.filter(MLSNUM=mls).one()
+    listing = Listing.query.filter_by(MLSNUM=mls).one().to_dict()
+    x = []
+    for col in columns:
+        x.append(listing[col])
+    print(x)
     return jsonify({'score': 75})

@@ -20,6 +20,8 @@ def initialize():
     print('Begin Pulling Data')
     data = utils.get_data('./data')
     print('Data Pulled Successfully')
+    data = data[data['STATUS'] == 'SLD']
+    data = data[data['PROPTYPE'] != 'CC']
     data = data.replace({np.nan: None})
     data = data.to_dict('records')
     data = data[0:10000] # Heroku Max DB Size

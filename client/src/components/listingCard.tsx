@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
-import { Card, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
 import { RoomOutlined } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
+import { useFlip } from '../context/flip.context';
+import { useHistory } from 'react-router-dom';
 
 
 const convertPrice = (price: number): string => {
@@ -29,7 +31,8 @@ const useStyles = makeStyles({
 });
 
 interface ListingProps {
-  listing: Listing
+  listing: Listing;
+  onClick: () => void;
 }
 
 const ListingCard: FC<ListingProps> = ({
@@ -43,7 +46,9 @@ const ListingCard: FC<ListingProps> = ({
     BATHS,
     SQFT
   }}) => {
+  const { setFlip } = useFlip();
   const classes = useStyles();
+  const history = useHistory();
 
   return (
       <Card className={classes.root}>
@@ -75,6 +80,17 @@ const ListingCard: FC<ListingProps> = ({
                 {BEDS} Beds, {BATHS} Baths, {SQFT} SQFT
               </Typography>
             </CardContent>
+            <CardActions>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => {
+                  history.push('/flip');
+                }}
+              >
+                View Home
+              </Button>
+            </CardActions>
           </Grid>
         </Grid>
       </Card>

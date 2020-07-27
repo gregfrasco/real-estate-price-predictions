@@ -13,19 +13,19 @@ export interface FlipContextProps {
 const FlipContext = createContext({} as FlipContextProps);
 
 const FlipProvider: FC = props => {
-  const [availableCities, setAvailableCities] = useState([]);
+  // const [availableCities, setAvailableCities] = useState([]);
   const [city, setCity] = useState('Boston');
   const [flip, setFlip] = useState();
   const [homes, setHomes] = useState((exampleHomes as unknown) as Listing[]);
-  useEffect(() => {
-    //runs once, gets all available cities
-    //data request to get all available cities
-    //setAvailableCities(response-from-fetch)
-    // fetch(`api/allCities`)
-    //   .then(res => res.json())
-    //   .then(data => console.log(data));
-    console.log('get cities!!')
-  }, []);
+  // useEffect(() => {
+  //   //runs once, gets all available cities
+  //   //data request to get all available cities
+  //   //setAvailableCities(response-from-fetch)
+  //   // fetch(`api/allCities`)
+  //   //   .then(res => res.json())
+  //   //   .then(data => console.log(data));
+  //   console.log('get cities!!')
+  // }, []);
 
   useEffect(() => {
     if (city) {

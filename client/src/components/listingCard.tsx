@@ -32,7 +32,7 @@ interface ListingProps {
 const ListingCard: FC<ListingProps> = ({ listing }) => {
   const {
     PHOTOURL,
-    MLSNUM,
+    // MLSNUM,
     LISTPRICE,
     ADDRESS,
     CITY,

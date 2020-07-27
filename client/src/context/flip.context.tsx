@@ -28,7 +28,7 @@ const FlipProvider: FC = props => {
     if (city) {
       //data request to get homes in certain city
       //setHomes(response-from-fetch);
-      fetch(`api/listings/${city}`, {
+      fetch(`api/listings/${city}`, s{
         headers : {
           'Content-Type': 'application/json',
           'Accept': 'application/json'

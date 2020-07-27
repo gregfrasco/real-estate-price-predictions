@@ -21,23 +21,19 @@ const FlipProvider: FC = props => {
     //runs once, gets all available cities
     //data request to get all available cities
     //setAvailableCities(response-from-fetch)
-    console.log('getting all possible cities HERE')
+    // fetch(`api/allCities`)
+    //   .then(res => res.json())
+    //   .then(data => console.log(data));
+    console.log('get cities!!')
   }, []);
 
   useEffect(() => {
     if (city) {
       //data request to get homes in certain city
       //setHomes(response-from-fetch);
-      fetch(`api/listings/${city}`, s{
-        headers : {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-         }
-
-      })
+      fetch(`api/listings/${city}`)
         .then(res => res.json())
-        .then(data => console.log(data));
-      // console.log('change in city:' + city)
+        .then(data => setHomes(data));
     }
   }, [city, setHomes]);
 

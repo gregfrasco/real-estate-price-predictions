@@ -37,7 +37,7 @@ const FlipProvider: FC = props => {
     }
   }, [city, setHomes]);
 
-  return <FlipContext.Provider value={{ city, setCity, flip, setFlip, homes, availableCities }} {...props} />;
+  return <FlipContext.Provider value={{ city, setCity, flip, setFlip, homes }} {...props} />;
 };
 
 const useFlip = () => useContext(FlipContext);

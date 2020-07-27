@@ -21,8 +21,9 @@ const Map: FC = () => {
   useEffect(() => {
     setMakers(
       homes.map(h => {
+        const { lat, lng } = h;
         return (
-          <Marker key={h.MLSNUM} position={h.location} onClick={() => setFlip(h)}>
+          <Marker key={h.MLSNUM} position={{lat, lng}} onClick={() => setFlip(h)}>
             {flip && flip.MLSNUM === h.MLSNUM && (
               <InfoWindow>
                 <Home viewHome />

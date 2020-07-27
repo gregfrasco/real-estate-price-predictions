@@ -1,14 +1,27 @@
 import React, { FC, Fragment } from 'react';
 import { Header } from '../components/header';
-import { useHistory } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import { Box, Container, Grid } from '@material-ui/core';
+import { LandingText } from '../components/landing-text';
+import { LandingImage} from '../components/landing-image';
 
 const LandingScreen: FC = () => {
-  const history = useHistory();
   return (
     <Fragment>
       <Header title={'Flipper'} showIcon />
-      <Button onClick={() => history.push('/homes')}>View Homes</Button>
+      <Container>
+        <Grid container direction="row" justify="space-between" alignItems="flex-start">
+          <Grid container item xs={6} spacing={2}>
+            <Box width="100%" marginTop={5}>
+              <LandingText />
+            </Box>
+          </Grid>
+          <Grid container item xs={6} spacing={2}>
+            <Box width="100%" marginTop={5}>
+              <LandingImage />
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
     </Fragment>
   );
 };

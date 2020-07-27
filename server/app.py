@@ -19,6 +19,14 @@ Db.init_app(app)
 def index():
     return app.send_static_file('index.html')
 
+@app.route('/api/allCities')
+def getAllCities():
+    cities = []
+    for city in Session.query(Listing.CITY).distinct():
+        cities.append(city)
+    return jsonify(cities)
+
+
 @app.route('/api/listings/<city>')
 def getListingsByCity(city):
     city_listings = Listing.query.filter_by(CITY=city).all()

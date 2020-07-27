@@ -6,14 +6,17 @@ import { ListingCard } from '../components/listingCard';
 
 const ListingsContainer: FC = () => {
   const { homes } = useFlip();
-  const listings = homes.map((home) =>
-    <Box paddingBottom={1}>
-      <ListingCard
-        key={home.MLSNUM}
-        listing={home}
-      />
-    </Box>
-  );
+  const listings = homes.map((home) => {
+    return (
+      <Box paddingBottom={1}>
+        <ListingCard
+          key={home.MLSNUM}
+          listing={home}
+        />
+      </Box>
+    );
+  })
+
   return (
     <ul>
       {listings}

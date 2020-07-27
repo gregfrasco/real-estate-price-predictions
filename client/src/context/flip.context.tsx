@@ -1,4 +1,4 @@
-import React, { createContext, FC, useContext, useEffect, useState } from 'react';
+import React, { createContext, FC, useContext, useState, useEffect } from 'react';
 import exampleHomes from './example-data.json';
 
 export interface FlipContextProps {
@@ -7,23 +7,35 @@ export interface FlipContextProps {
   flip: Listing;
   setFlip: (mls: Listing) => void;
   homes: Listing[];
+  //availableCities: string[];
 }
 
 const FlipContext = createContext({} as FlipContextProps);
 
 const FlipProvider: FC = props => {
+  // const [availableCities, setAvailableCities] = useState([]);
   const [city, setCity] = useState('Boston');
   const [flip, setFlip] = useState();
-  const [homes] = useState((exampleHomes as unknown) as Listing[]);
+  const [homes, setHomes] = useState((exampleHomes as unknown) as Listing[]);
+  // useEffect(() => {
+  //   //runs once, gets all available cities
+  //   //data request to get all available cities
+  //   //setAvailableCities(response-from-fetch)
+  //   // fetch(`api/allCities`)
+  //   //   .then(res => res.json())
+  //   //   .then(data => console.log(data));
+  //   console.log('get cities!!')
+  // }, []);
+
   useEffect(() => {
-    if (flip) {
-      fetch(`/api/predict/${flip.MLSNUM}`)
+    if (city) {
+      //data request to get homes in certain city
+      fetch(`api/listings/${city}`)
         .then(res => res.json())
-        .then(res => {
-          flip.flipScore = res.score;
-        });
+        .then(data => setHomes(data));
     }
-  }, [flip]);
+  }, [city, setHomes]);
+
   return <FlipContext.Provider value={{ city, setCity, flip, setFlip, homes }} {...props} />;
 };
 

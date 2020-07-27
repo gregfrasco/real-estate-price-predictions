@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
-import { Card, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
 import { RoomOutlined } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
+import { useFlip } from '../context/flip.context';
+import { useHistory } from 'react-router-dom';
 
 
 const convertPrice = (price: number): string => {
@@ -15,11 +17,6 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
   title: {
     fontSize: 14,
   },
@@ -29,21 +26,23 @@ const useStyles = makeStyles({
 });
 
 interface ListingProps {
-  listing: Listing
+  listing: Listing;
 }
 
-const ListingCard: FC<ListingProps> = ({
-  listing: {
+const ListingCard: FC<ListingProps> = ({ listing }) => {
+  const {
     PHOTOURL,
-    MLSNUM,
+    // MLSNUM,
     LISTPRICE,
     ADDRESS,
     CITY,
     BEDS,
     BATHS,
     SQFT
-  }}) => {
+  } = listing;
   const classes = useStyles();
+  const history = useHistory();
+  const { setFlip } = useFlip();
 
   return (
       <Card className={classes.root}>
@@ -75,6 +74,17 @@ const ListingCard: FC<ListingProps> = ({
                 {BEDS} Beds, {BATHS} Baths, {SQFT} SQFT
               </Typography>
             </CardContent>
+            <CardActions>
+              <Button variant="contained" color="primary"
+                onClick={() => {
+                    setFlip(listing);
+                    history.push('/flip');
+                  }
+                }
+              >
+              View Home
+              </Button>
+            </CardActions>
           </Grid>
         </Grid>
       </Card>

@@ -7,7 +7,7 @@ export interface FlipContextProps {
   flip: Listing;
   setFlip: (mls: Listing) => void;
   homes: Listing[];
-  availableCities: string[];
+  //availableCities: string[];
 }
 
 const FlipContext = createContext({} as FlipContextProps);
@@ -30,7 +30,6 @@ const FlipProvider: FC = props => {
   useEffect(() => {
     if (city) {
       //data request to get homes in certain city
-      //setHomes(response-from-fetch);
       fetch(`api/listings/${city}`)
         .then(res => res.json())
         .then(data => setHomes(data));

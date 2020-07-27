@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
+import { useFlip } from '../context/flip.context';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const LandingText: FC = () => {
   const history = useHistory();
   const classes = useStyles();
-  const [city, setCity] = React.useState('');
+  const { city, setCity } = useFlip();
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setCity(event.target.value as string);
@@ -52,6 +53,7 @@ const LandingText: FC = () => {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
+            //map availableCities in this section
             <MenuItem value={'Boston'}>Boston</MenuItem>
             <MenuItem value={'MexicoCity'}>Mexico City</MenuItem>
             <MenuItem value={'London'}>London</MenuItem>

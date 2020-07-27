@@ -17,11 +17,6 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
   title: {
     fontSize: 14,
   },
@@ -32,11 +27,10 @@ const useStyles = makeStyles({
 
 interface ListingProps {
   listing: Listing;
-  onClick: () => void;
 }
 
-const ListingCard: FC<ListingProps> = ({
-  listing: {
+const ListingCard: FC<ListingProps> = ({ listing }) => {
+  const {
     PHOTOURL,
     MLSNUM,
     LISTPRICE,
@@ -45,10 +39,10 @@ const ListingCard: FC<ListingProps> = ({
     BEDS,
     BATHS,
     SQFT
-  }}) => {
-  const { setFlip } = useFlip();
+  } = listing;
   const classes = useStyles();
   const history = useHistory();
+  const { setFlip } = useFlip();
 
   return (
       <Card className={classes.root}>
@@ -81,14 +75,14 @@ const ListingCard: FC<ListingProps> = ({
               </Typography>
             </CardContent>
             <CardActions>
-              <Button
-                size="small"
-                color="primary"
+              <Button variant="contained" color="primary"
                 onClick={() => {
-                  history.push('/flip');
-                }}
+                    setFlip(listing);
+                    history.push('/flip');
+                  }
+                }
               >
-                View Home
+              View Home
               </Button>
             </CardActions>
           </Grid>

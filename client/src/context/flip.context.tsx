@@ -7,36 +7,34 @@ export interface FlipContextProps {
   flip: Listing;
   setFlip: (mls: Listing) => void;
   homes: Listing[];
-  //availableCities: string[];
+  availableCities: string[];
 }
 
 const FlipContext = createContext({} as FlipContextProps);
 
 const FlipProvider: FC = props => {
-  // const [availableCities, setAvailableCities] = useState([]);
+  const [availableCities, setAvailableCities] = useState(['Boston', 'Mexico']);
   const [city, setCity] = useState('Boston');
   const [flip, setFlip] = useState();
   const [homes, setHomes] = useState((exampleHomes as unknown) as Listing[]);
-  // useEffect(() => {
-  //   //runs once, gets all available cities
-  //   //data request to get all available cities
-  //   //setAvailableCities(response-from-fetch)
-  //   // fetch(`api/allCities`)
-  //   //   .then(res => res.json())
-  //   //   .then(data => console.log(data));
-  //   console.log('get cities!!')
-  // }, []);
+
+  useEffect(() => {
+    if (availableCities) {
+      fetch(`api/allCities`)
+        .then(res => res.json())
+        .then(data => setAvailableCities(data));
+    }
+  }, [availableCities]);
 
   useEffect(() => {
     if (city) {
-      //data request to get homes in certain city
       fetch(`api/listings/${city}`)
         .then(res => res.json())
         .then(data => setHomes(data));
     }
   }, [city, setHomes]);
 
-  return <FlipContext.Provider value={{ city, setCity, flip, setFlip, homes }} {...props} />;
+  return <FlipContext.Provider value={{ city, setCity, flip, setFlip, homes, availableCities }} {...props} />;
 };
 
 const useFlip = () => useContext(FlipContext);

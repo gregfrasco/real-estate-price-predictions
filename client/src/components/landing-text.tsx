@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const LandingText: FC = () => {
   const history = useHistory();
   const classes = useStyles();
-  const { city, setCity } = useFlip();
+  const { city, setCity, availableCities } = useFlip();
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setCity(event.target.value as string);
@@ -50,13 +50,13 @@ const LandingText: FC = () => {
               onChange={handleChange}
               label="City"
             >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            //map availableCities in this section
-            <MenuItem value={'Boston'}>Boston</MenuItem>
-            <MenuItem value={'MexicoCity'}>Mexico City</MenuItem>
-            <MenuItem value={'London'}>London</MenuItem>
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              //map availableCities in this section
+              {availableCities.map((city, index) =>
+                <MenuItem key={index} value={city}>{city}</MenuItem>
+              )}
             </Select>
           </FormControl>
         </Grid>

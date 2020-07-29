@@ -1,12 +1,20 @@
 import React, { FC } from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, Card, CardMedia } from '@material-ui/core';
 
 
 const LandingImage: FC = () => {
   return (
-      <Typography variant="h2" gutterBottom>
-        Image goes here
-      </Typography>
+    <Card>
+      <CardMedia
+        component="img"
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
+        src={"http://media.mlspin.com/photo.aspx?mls=72186637"}
+        title={'Home page image'}
+      />
+    </Card>
   );
 };
 

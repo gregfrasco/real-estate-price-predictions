@@ -35,7 +35,7 @@ const LandingText: FC = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography variant="h2" gutterBottom>
-            <Box fontWeight="fontWeightRegular">
+            <Box fontWeight="fontWeightRegular" marginTop={5}>
               Find a Flip
             </Box>
           </Typography>

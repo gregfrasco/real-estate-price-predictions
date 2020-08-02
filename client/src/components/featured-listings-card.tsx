@@ -1,8 +1,17 @@
 import React, { FC, Fragment } from 'react';
-import { Typography, Box, Card, CardContent, CardMedia, } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
+import { RoomOutlined } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
+import { useFlip } from '../context/flip.context';
+import { useHistory } from 'react-router-dom';
 
+
+const convertPrice = (price: number): string => {
+  if (price > 1000000) {
+    return `$${(price / 1000000).toFixed(1)}m`;
+  }
+  return `$${Math.floor(price / 1000)}k`;
+};
 
 const useStyles = makeStyles({
   root: {
@@ -13,9 +22,25 @@ const useStyles = makeStyles({
   },
 });
 
+interface ListingProps {
+  listing: Listing;
+}
 
-const FeaturedListingsCard: FC = () => {
+const FeaturedListingsCard: FC<ListingProps> = ({ listing }) => {
+  const {
+    PHOTOURL,
+    // MLSNUM,
+    LISTPRICE,
+    ADDRESS,
+    CITY,
+    BEDS,
+    BATHS,
+    SQFT
+  } = listing;
+
   const classes = useStyles();
+  const history = useHistory();
+  const { setFlip } = useFlip();
 
   return (
     <Fragment>
@@ -28,23 +53,34 @@ const FeaturedListingsCard: FC = () => {
                 width: '100%',
                 height: '100%',
               }}
-              src={'http://media.mlspin.com/photo.aspx?mls=72186637'}
-
+              src={PHOTOURL}
+              title={ADDRESS}
             />
             <CardContent>
               <Typography variant="h6">
-                43 Water Ln
+                {ADDRESS}
               </Typography>
               <Typography color="secondary">
-                Boston
+                {CITY}
               </Typography>
               <Typography color="textPrimary" gutterBottom>
-                $4.1m
+                {convertPrice(LISTPRICE)}
               </Typography>
               <Typography gutterBottom>
-                5 Beds, 3 Baths, 1757 SQFT
+                {BEDS} Beds, {BATHS} Baths, {SQFT} SQFT
               </Typography>
             </CardContent>
+            <CardActions>
+              <Button variant="contained" color="primary"
+                onClick={() => {
+                    setFlip(listing);
+                    history.push('/flip');
+                  }
+                }
+              >
+              View Home
+              </Button>
+            </CardActions>
           </Card>
         </Grid>
       </Grid>

@@ -4,7 +4,7 @@ import { Box, Container, Grid } from '@material-ui/core';
 import { LandingText } from '../components/landing-text';
 import { LandingImage} from '../components/landing-image';
 import { FeaturedListingsText } from '../components/featured-listings-text';
-import { FeaturedListingsCard } from '../components/featured-listings-card';
+import { FeaturedListingsContainer } from '../components/featured-listings-container';
 
 
 const LandingScreen: FC = () => {
@@ -27,19 +27,13 @@ const LandingScreen: FC = () => {
             </Box>
           </Grid>
           <Grid container item xs={12} justify="center">
-            <Box marginTop={5}>
+            <Box width="100%" marginTop={5}>
               <FeaturedListingsText />
             </Box>
           </Grid>
           <Grid container item xs={12} justify="center">
             <Box marginTop={5} marginBottom={5} m={3}>
-              <FeaturedListingsCard />
-            </Box>
-            <Box marginTop={5} marginBottom={5} m={3}>
-              <FeaturedListingsCard />
-            </Box>
-            <Box marginTop={5} marginBottom={5} m={3}>
-              <FeaturedListingsCard />
+              <FeaturedListingsContainer />
             </Box>
           </Grid>
         </Grid>

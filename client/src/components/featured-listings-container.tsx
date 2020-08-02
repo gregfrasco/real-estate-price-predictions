@@ -1,5 +1,5 @@
 import React, { FC, Fragment } from 'react';
-import { Box, Grid } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { useFlip } from '../context/flip.context';
 import { FeaturedListingsCard } from '../components/featured-listings-card';
 

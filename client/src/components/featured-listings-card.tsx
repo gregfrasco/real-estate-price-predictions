@@ -1,6 +1,5 @@
 import React, { FC, Fragment } from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
-import { RoomOutlined } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { useFlip } from '../context/flip.context';
 import { useHistory } from 'react-router-dom';

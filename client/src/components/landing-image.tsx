@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Typography, Card, CardMedia } from '@material-ui/core';
+import { Card, CardMedia } from '@material-ui/core';
 
 
 const LandingImage: FC = () => {

@@ -18,26 +18,38 @@ const containerStyle = {
 const Map: FC = () => {
   const { homes, flip, setFlip } = useFlip();
   const [markers, setMakers] = useState();
+  const [map, setMap] = useState();
   useEffect(() => {
-    setMakers(
-      homes.map(h => {
-        const { lat, lng } = h;
-        return (
+    const allLat: number[] = []
+    const allLng: number[] = []
+    const homeMarkers = homes.map(h => {
+      const { lat, lng } = h;
+      allLat.push(lat as number);
+      allLng.push(lng as number);
+      return (
           <Marker key={h.MLSNUM} position={{lat, lng}} onClick={() => setFlip(h)}>
-            {flip && flip.MLSNUM === h.MLSNUM && (
-              <InfoWindow>
-                <Home viewHome />
-              </InfoWindow>
-            )}
+              {flip && flip.MLSNUM === h.MLSNUM && (
+                  <InfoWindow>
+                      <Home viewHome />
+                  </InfoWindow>
+              )}
           </Marker>
-        );
-      })
-    );
-  }, [flip, setFlip, homes, setMakers]);
+      );
+    });
+    setMakers(homeMarkers);
+    const newLocation = {
+        lat: allLat.reduce((a,v) => a + v) / allLat.length,
+        lng: allLng.reduce((a,v) => a + v) / allLng.length,
+    };
+    if (map) {
+      map.panTo(newLocation);
+    }
+  }, [flip, setFlip, homes, setMakers, map]);
   return (
-    <Card style={{ flex: 1 }}>
+    <Card style={{ flex: 1, marginTop: '2rem' }}>
       <LoadScript googleMapsApiKey="AIzaSyAftwrvS2Mphv821bXwZMOR3EmC6esH8Fk">
         <GoogleMap
+          onLoad={setMap}
           mapContainerStyle={containerStyle}
           center={center}
           zoom={13}

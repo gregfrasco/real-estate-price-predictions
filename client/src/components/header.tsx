@@ -12,7 +12,7 @@ const Header: FC<HeaderProps> = ({ title, showIcon }) => {
   const { city, setCity } = useFlip();
   const [searching, setSearching] = useState(false);
   return (
-    <Toolbar>
+    <Toolbar style={{ background: '#2196f3' }}>
       {showIcon && <HomeIcon />}
       <Typography variant="h6" color="inherit" noWrap style={{ marginLeft: '1rem', flex: 1 }}>
         {title}

@@ -2,6 +2,8 @@ import React, { FC, Fragment } from 'react';
 import { Box } from '@material-ui/core';
 import { useFlip } from '../context/flip.context';
 import { FeaturedListingsCard } from '../components/featured-listings-card';
+import Grid from '@material-ui/core/Grid';
+
 
 
 const FeaturedListingsContainer: FC = () => {
@@ -11,12 +13,14 @@ const FeaturedListingsContainer: FC = () => {
   for (const home of homes) {
     if (i <= 2) {
       featuredHomes.push(
-        <Box paddingBottom={1}>
-          <FeaturedListingsCard
-            key={home.MLSNUM}
-            listing={home}
-          />
-        </Box>
+        <Grid item xs={4}>
+          <Box paddingBottom={1}>
+            <FeaturedListingsCard
+              key={home.MLSNUM}
+              listing={home}
+            />
+          </Box>
+        </Grid>
       )
       i++;
     }
@@ -24,7 +28,9 @@ const FeaturedListingsContainer: FC = () => {
 
   return (
     <Fragment>
-      {featuredHomes}
+      <Grid container spacing={2}>
+        {featuredHomes}
+      </Grid>
     </Fragment>
   );
 };

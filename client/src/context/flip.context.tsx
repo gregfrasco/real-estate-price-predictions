@@ -8,23 +8,27 @@ export interface FlipContextProps {
   setFlip: (mls: Listing) => void;
   homes: Listing[];
   availableCities: string[];
+  probability: number;
 }
 
 const FlipContext = createContext({} as FlipContextProps);
 
 const FlipProvider: FC = props => {
-  const [availableCities, setAvailableCities] = useState(['Boston', 'Mexico']);
-  const [city, setCity] = useState('Boston');
+  const [probability, setProbability] = useState();
+  const [city, setCity] = useState();
   const [flip, setFlip] = useState();
   const [homes, setHomes] = useState((exampleHomes as unknown) as Listing[]);
+  const [availableCities, setAvailableCities] = useState();
 
   useEffect(() => {
-    if (availableCities) {
-      fetch(`api/allCities`)
+    if (flip) {
+      fetch(`/api/predict/${flip.MLSNUM}`)
         .then(res => res.json())
-        .then(data => setAvailableCities(data));
+        .then(res => {
+          setProbability(res.score);
+        });
     }
-  }, [availableCities]);
+  }, [flip]);
 
   useEffect(() => {
     if (city) {
@@ -34,7 +38,24 @@ const FlipProvider: FC = props => {
     }
   }, [city, setHomes]);
 
-  return <FlipContext.Provider value={{ city, setCity, flip, setFlip, homes, availableCities }} {...props} />;
+  useEffect(() => {
+    // if (availableCities) {
+    fetch(`api/allCities`)
+      .then(res => res.json())
+      .then(data => {
+        var cities = []
+        for (var c of data) {
+          cities.push(c[0])
+        }
+        console.log('cities: ', cities)
+        setAvailableCities(cities);
+        setCity('Boston');
+      }
+    )
+
+  }, []);
+
+  return <FlipContext.Provider value={{ city, setCity, flip, setFlip, homes, availableCities, probability }} {...props} />;
 };
 
 const useFlip = () => useContext(FlipContext);

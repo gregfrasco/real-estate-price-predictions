@@ -22,7 +22,7 @@ def index():
 @app.route('/api/allCities')
 def getAllCities():
     cities = []
-    for city in Session.query(Listing.CITY).distinct():
+    for city in Db.session.query(Listing.CITY).distinct():
         cities.append(city)
     return jsonify(cities)
 

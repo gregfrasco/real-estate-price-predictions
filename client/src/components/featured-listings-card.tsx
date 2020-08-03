@@ -1,7 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core';
-import { RoomOutlined } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/core/styles';
+ import { makeStyles } from '@material-ui/core/styles';
 import { useFlip } from '../context/flip.context';
 import { useHistory } from 'react-router-dom';
 
@@ -15,13 +14,10 @@ const convertPrice = (price: number): string => {
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    maxWidth: 345,
   },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
+  media: {
+    height: 140,
   },
 });
 
@@ -29,7 +25,7 @@ interface ListingProps {
   listing: Listing;
 }
 
-const ListingCard: FC<ListingProps> = ({ listing }) => {
+const FeaturedListingsCard: FC<ListingProps> = ({ listing }) => {
   const {
     PHOTOURL,
     LISTPRICE,
@@ -39,14 +35,16 @@ const ListingCard: FC<ListingProps> = ({ listing }) => {
     BATHS,
     SQFT
   } = listing;
+
   const classes = useStyles();
   const history = useHistory();
   const { setFlip } = useFlip();
 
   return (
-      <Card className={classes.root}>
-        <Grid container>
-          <Grid item xs={4}>
+    <Fragment>
+      <Grid container>
+        <Grid item xs={12}>
+          <Card className={classes.root}>
             <CardMedia
               component="img"
               style={{
@@ -56,20 +54,17 @@ const ListingCard: FC<ListingProps> = ({ listing }) => {
               src={PHOTOURL}
               title={ADDRESS}
             />
-          </Grid>
-          <Grid item xs={8}>
             <CardContent>
-              <Typography className={classes.title} variant="h6" gutterBottom>
+              <Typography variant="h6">
                 {ADDRESS}
               </Typography>
               <Typography color="secondary">
-                <RoomOutlined fontSize="small" color="secondary" />
                 {CITY}
               </Typography>
               <Typography color="textPrimary" gutterBottom>
                 {convertPrice(LISTPRICE)}
               </Typography>
-              <Typography className={classes.title} gutterBottom>
+              <Typography gutterBottom>
                 {BEDS} Beds, {BATHS} Baths, {SQFT} SQFT
               </Typography>
             </CardContent>
@@ -84,10 +79,11 @@ const ListingCard: FC<ListingProps> = ({ listing }) => {
               View Home
               </Button>
             </CardActions>
-          </Grid>
+          </Card>
         </Grid>
-      </Card>
+      </Grid>
+    </Fragment>
   );
 };
 
-export { ListingCard };
+export { FeaturedListingsCard }

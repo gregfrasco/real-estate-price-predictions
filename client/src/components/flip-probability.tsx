@@ -3,7 +3,7 @@ import { Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { useFlip } from '../context/flip.context';
 
 const FlipProbability: FC = () => {
-  const { flip } = useFlip();
+  const { flip, probability } = useFlip();
   if (!flip) {
     return null;
   }
@@ -16,7 +16,7 @@ const FlipProbability: FC = () => {
           </Grid>
           <Grid item xs={5}>
             <Typography variant="h6" style={{ textAlign: 'end' }}>
-              {`${flip.flipScore}%`}
+              {probability}%
             </Typography>
           </Grid>
         </Grid>

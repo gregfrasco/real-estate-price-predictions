@@ -3,11 +3,20 @@ import { Typography, Button, Box } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import { SelectCity } from '../components/select-city';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      minWidth: 300
+    },
+  }),
+);
 
 const LandingText: FC = () => {
   const history = useHistory();
-
+  const classes = useStyles();
 
   return (
     <Fragment>
@@ -23,7 +32,7 @@ const LandingText: FC = () => {
           <SelectCity />
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" color="primary" onClick={() => history.push('/homes')}>View Homes</Button>
+          <Button variant="contained" color="primary" className={classes.root} onClick={() => history.push('/homes')}>View Homes</Button>
         </Grid>
       </Grid>
     </Fragment>

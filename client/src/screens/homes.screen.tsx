@@ -12,7 +12,7 @@ const HomesScreen: FC = () => {
       <Container>
         <Grid container direction="row" justify="space-between" alignItems="flex-start">
           <Grid container item xs={5} spacing={2}>
-            <Box width="100%">
+            <Box width="100%" marginTop={2}>
               <ListingsContainer />
             </Box>
           </Grid>

@@ -47,7 +47,7 @@ const FlipProvider: FC = props => {
         for (var c of data) {
           cities.push(c[0])
         }
-        console.log('cities: ', cities)
+        cities.sort();
         setAvailableCities(cities);
         setCity('Boston');
       }

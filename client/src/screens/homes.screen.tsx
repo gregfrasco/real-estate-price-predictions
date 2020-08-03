@@ -8,9 +8,7 @@ import { Box, Container, Grid } from '@material-ui/core';
 const HomesScreen: FC = () => {
   return (
     <Fragment>
-      <Box paddingBottom={4}>
-        <Header title={'Flips for Sale'} />
-      </Box>
+      <Header title={'Flips for Sale'} />
       <Container>
         <Grid container direction="row" justify="space-between" alignItems="flex-start">
           <Grid container item xs={5} spacing={2}>

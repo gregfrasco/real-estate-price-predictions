@@ -13,9 +13,10 @@ const convertPrice = (price: number): string => {
 
 interface HomeProps {
   viewHome?: boolean;
+  largeImage?: boolean
 }
 
-const Home: FC<HomeProps> = ({ viewHome }) => {
+const Home: FC<HomeProps> = ({ viewHome, largeImage }) => {
   const { flip } = useFlip();
   const history = useHistory();
   if (!flip) {
@@ -27,7 +28,7 @@ const Home: FC<HomeProps> = ({ viewHome }) => {
         component="img"
         style={{
           width: '100%',
-          height: '200px'
+          height: largeImage ? '400px' : '200px'
         }}
         src={flip.PHOTOURL}
         title={flip.ADDRESS}

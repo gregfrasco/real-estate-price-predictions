@@ -17,9 +17,10 @@ const useStyles = makeStyles((theme: Theme) =>
 interface HeaderProps {
   title: string;
   showIcon?: boolean;
+  hideCitySelect?: boolean;
 }
 
-const Header: FC<HeaderProps> = ({ title, showIcon }) => {
+const Header: FC<HeaderProps> = ({ title, showIcon, hideCitySelect }) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -39,7 +40,7 @@ const Header: FC<HeaderProps> = ({ title, showIcon }) => {
           {title}
         </Typography>
         <Card>
-          <SelectCity />
+            {!hideCitySelect && <SelectCity />}
         </Card>
       </Toolbar>
       </Box>

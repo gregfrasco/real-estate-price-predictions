@@ -10,7 +10,7 @@ import { FeaturedListingsContainer } from '../components/featured-listings-conta
 const LandingScreen: FC = () => {
   return (
     <Fragment>
-      <Header title={'Flipper'} showIcon />
+      <Header title={'Flipper'} showIcon hideCitySelect/>
       <Container>
         <Grid container direction="row" justify="space-between" alignItems="flex-start">
           <Grid container item xs={12}>

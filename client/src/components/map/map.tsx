@@ -15,6 +15,19 @@ const containerStyle = {
   height: '600px'
 };
 
+const getMarkerColor = (score?: number | null) => {
+    if (!score) {
+        return '#dd2c00'
+    }
+    if(score > 80) {
+        return '#4caf50'
+    }
+    if(score > 40) {
+        return '#ffc107'
+    }
+    return '#dd2c00'
+}
+
 const Map: FC = () => {
   const { homes, flip, setFlip } = useFlip();
   const [markers, setMakers] = useState();
@@ -31,7 +44,7 @@ const Map: FC = () => {
                   position={{lat, lng}}
                   icon={{
                       path: 'M64,2A43.88,43.88,0,0,0,20,45.76C20,69.94,53,126,64,126s44-56.06,44-80.24A43.88,43.88,0,0,0,64,2Zm0,57.44A17.32,17.32,0,1,1,81.32,42.12,17.32,17.32,0,0,1,64,59.44Z',
-                      fillColor: h.FLIP_SCORE || 0 > 75 ? '#4caf50' : h.FLIP_SCORE || 0 > 45 ? '#ffc107' : '#dd2c00',
+                      fillColor: getMarkerColor(h.FLIP_SCORE),
                       fillOpacity: 1,
                       strokeColor: '#000',
                       strokeWeight: 1,

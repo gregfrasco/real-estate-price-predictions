@@ -16,7 +16,7 @@ const FlipProbability: FC = () => {
           </Grid>
           <Grid item xs={5}>
             <Typography variant="h6" style={{ textAlign: 'end' }}>
-              {probability}%
+              {Math.floor(probability)}%
             </Typography>
           </Grid>
         </Grid>

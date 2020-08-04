@@ -12,7 +12,7 @@ def get_data(filepath: str) -> pd.DataFrame:
     li = []
     files = find_csv(filepath)
     for filepath in files:
-        df = pd.read_csv(filepath, index_col=None)
+        df = pd.read_csv(filepath, index_col=None, encoding='ISO-8859-1')
         # Some files have index column that is unnamed
         df = df.drop(df.filter(regex='Unnamed').columns, axis=1)
         # Some files have an index column with the header of 0

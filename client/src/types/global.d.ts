@@ -40,5 +40,5 @@ interface Listing {
   zoMLSNUM?: string | null;
   lat?: number | null;
   lng?: number | null;
-  flipScore?: number | null;
+  FLIP_SCORE?: number | null;
 }

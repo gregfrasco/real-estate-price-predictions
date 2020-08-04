@@ -6,7 +6,9 @@ The housing market is known for its challenges and opportunities. One of those o
 
 ## Solution
 
-The goal of this project is to find and analyze houses on the market, determine if the house is flippable and estimate the market value for a home after renovations. We plan on building an interactive website to educate the buyer of the potential value of the home. Our team plans on building a machine learning model that factors in listings from MLS to identify the homes value, and identify potential flips.
+The goal of this project is to find and analyze houses on the market to determine if the house is flippable.
+
+Our model tries to see if we can predict flippable houses *without* using the description (descriptions will often explicity say if the property is a fixer-upper or needs some work) or photos (which can show the state of the property), to see if there's some other key indicators or similarities in the listings. We could see this being useful in a few ways - in the current housing shortage, investors often try to get in on a property before it hits the market. An investor could use our tool to find a property before it goes on the market and before image and descriptions are available. This helps the investor avoid competition and find good deals.
 
 ## Project Plan
 
@@ -14,26 +16,26 @@ The goal of this project is to find and analyze houses on the market, determine 
 
 | Milestone                                                                        | Leader | Estimated Time | Status    |
 |----------------------------------------------------------------------------------|--------|----------------|-----------|
-| Cleaning Data                                                                    | Nina + Bry    | 1 week         | In Progress   |
+| Cleaning Data                                                                    | Nina + Bry    | 1 week         | Completed   |
 | Classify houses that have been bought and sold in a relatively short time period | Greg + Nina   | 1 week         | Completed |
-| Optimize the model for better results and produce a flip score                   | Nina    | 1.5 weeks      | Planned   |
+| Optimize the model for better results and produce a flip score                   | Nina    | 1.5 weeks      | Completed   |
 
 ### Frontend Application
 
 | Milestone                    | Leader         | Estimated Time | Status      |
 |------------------------------|----------------|----------------|-------------|
 | Wireframe Application Design | Enrique        | 1 week         | Completed   |
-| Flip View Page               | Greg & Enrique | 1.5 weeks      | In Progress |
-| Flip Listing Page            | Greg & Enrique | 1.5 weeks      | In Progress |
+| Flip View Page               | Greg & Enrique | 1.5 weeks      | Completed   |
+| Flip Listing Page            | Greg & Enrique | 1.5 weeks      | Completed   |
 
 
 ### Backend Application
 
 | Milestone                                                                             | Leader | Estimated Time | Status    |
 |---------------------------------------------------------------------------------------|--------|----------------|-----------|
-| Define an RESTful Spec to allow the frontend to interact with the data and ML models  | TBD    | 1 week         | Planned   |
-| Build a RESTful api with stub data to start integration with the frontend             | TBD    | 1 week         | Planned   |
-| Integrate backend with model and data                                                 | TBD    | 1 week         | Planned   |
+| Define an RESTful Spec to allow the frontend to interact with the data and ML models  | TBD    | 1 week         | Completed |
+| Build a RESTful api with stub data to start integration with the frontend             | TBD    | 1 week         | Completed |
+| Integrate backend with model and data                                                 | TBD    | 1 week         | Completed |
 | Deploy Application to Heroku                                                          | Greg   | 1 week         | Completed |
 
 
@@ -49,25 +51,41 @@ There's lots of cataloging of the process in our basic_model notebook since it's
 
 ### Data Cleaning
 
-We found some errors in the MLS dataset (ex having negative ages or lot sizes given in both acres and square feet). Given that we're working with a limited set of flipped homes in the data, we're going to make the effort to clean up this data where possible. This effort is in progress.
+We found some errors in the MLS dataset (ex having negative ages or lot sizes given in both acres and square feet). Given that we're working with a limited set of flipped homes in the data, we made the effort to clean up this data where possible.
 
 We removed condos from our data for now, because it was difficult to match on address to identify flips (conds unit data is not great, and it's going to take a lot of extra work to include single and multi family building that were condoized into our data, though this would be very valuable).
 
+Here's a list of the cleaning operations we performed:
+
+* Fix bad listings where commas in the description caused bad data in the later columns
+* Fix age where year built was used instead of years old
+
 ### Variable Selection
+Our model uses a mix of categorical and continuous variables. We used SOLDPRICE to train and test, but we imagine an investor may use the recorded assessed price from property tax records with a penalty for condition if available and a growth factor to better match "market" rate.
 
-We cleaned most of the continuous variables for this milestone. For the next one, we'd like to play with including several categorical variables to our data set to see if any improve the model. The most interesting ones to us at the moment are number of photos included in the listing (fixer uppers anecdotally include fewer photos, so this may be a great predictor), property type, and potentially zip code (we imagine some areas are more likely to have flips than others).
+We also performed PCA to help guide variable selection, with SOLDPRICE and SQFT having the strongest effect on the two principal components.
 
-We also performed PCA to help guide variable selection, and in the next iteration will try the model with fewer variables to see if accuracy improves (and remove some of the issues caused by strongly correlated predictors...). We are also going to try log-transforming some of the coontinuous variables, namely price, to see if that helps better separate the data.
+More predictors seemed to improve the model slightly, and dropping predictors made the accuracy go down. That said, the addition of all the categorical variables did not greatly improve performance. Interestingly, number of bathrooms seemed to have a predictive power, opening the possibility that pre-flipped homes may have a smaller footprint (SQFT), fewer bathrooms, and a lower price than average homes on the market.
+
+Transforming (log) all or part of the continuous variables made the model perform worse. This makes sense when we look at the distribution - transforming helps temper the effect of outliers, but the flipped homes actually tend to cluster right in the middle of the plot of all homes for various predictors, with outliers almost always belonging to the non-flippable category. By removing the effect of key outliers (ex: a large apartment building with 99 garage spaces - a real data point), we actually made the model perform slightly worse.
 
 ### Model Selection
 
-We ran the basic untransformed data through a series of classification models including logistic regression, decision tree classifier, LDA and QDA, KNN, SVM, several boosting algorithms, random forest, and bagging. The idea was to see which models worked well with our data and set us up to be able to quickly run many models with different combinations of transformed and untransformed predictors.
+We ran the basic untransformed data through a series of classification models including logistic regression, decision tree classifier, LDA and QDA, KNN, SVM, several boosting algorithms, random forest, and bagging. This is documented in the notebook basic_model.
 
-Decision trees and random forest performed best, followed by KNN with 3 neighbors. The next step will be tuning and improving parameters with gridsearch, combining approaches, applying better cv techniques like bootstrap, and trying approaches known to work on imbalanced data like SMOTE. Should be a "breeze" ;).
+Random forest using all predictors performed best. We did try a round of tuning, but the "best" parameters did not really improve accuracy while making the model slower and bigger. Random forest did very inentifying all the true 0s (non-flippable) as 0s, and did better than average at identifying flips. It still misclassified some flips (1s) as 0s.
 
-### Listing Descriptions and Photos
+                 precision  recall  f1-score    support
+       False       0.98      1.00      0.99     41448
+        True       1.00      0.68      0.81      2566
 
-We'd also like to improve the accuracy of our classifier by learning from the listing descriptions and (if there's time) from the listing images themselves. We will work on including that in the next two weeks!
+    accuracy                           0.98     44014
+    macro avg      0.99      0.84      0.90     44014
+    weighted avg   0.98      0.98      0.98     44014
+
+Because our dataset of flips was smaller than the non-flippable homes, we also tried oversampling with SMOTE. Oddly, this decreased performance for random forest and decision tree, though it slightly improved all the other models (not enough to compete with the trees).
+
+To improve the model, we could try a few things - the first is cleaning the data further, and doing a better analysis of the flips we identified to make sure each one is a specimen pre-flipped home. We could augment our dataset with more real flip data by finding distressed homes that were flipped by owners (bought distressed, then renovated to live in and not sold). We could also validate the data set of non-flippable homes to remove any oddities. We could add condos to the mix to find distressed properties that were sold as a single or multi-family and later flipped into condos. All of this could improve the data and therefor the performance of our model.
 
 ## Frontend Application
 

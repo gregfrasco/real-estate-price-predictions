@@ -4,8 +4,8 @@ from os import environ
 from dotenv import load_dotenv
 from models.listing import Db, Listing
 import joblib
-model = joblib.load('./model.pkl')
-columns = ['SOLDPRICE', 'DOM', 'BEDS', 'BATHS', 'SQFT', 'AGE', 'GARAGE']
+model = joblib.load('./rf_full.pkl')
+columns = ['SOLDPRICE', 'DOM', 'BEDS', 'BATHS', 'SQFT', 'AGE', 'GARAGE', 'PROPTYPE_CAT', 'STYLE_CAT', 'ZIP_CAT', 'SOLDDATE_CAT']
 load_dotenv('.env')
 
 app = Flask(__name__, static_folder='../client/build', static_url_path='/')

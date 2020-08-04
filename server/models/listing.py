@@ -47,6 +47,11 @@ class Listing(Db.Model):
     zoMLSNUM = Db.Column(Db.Integer, nullable=True)
     lat = Db.Column(Db.Float, nullable=True)
     lng = Db.Column(Db.Float, nullable=True)
+    PROPTYPE_CAT = Db.Column(Db.Integer, nullable=True)
+    STYLE_CAT = Db.Column(Db.Integer, nullable=True)
+    ZIP_CAT = Db.Column(Db.Integer, nullable=True)
+    SOLDDATE_CAT = Db.Column(Db.Integer, nullable=True)
+    FLIP_SCORE = Db.Column(Db.Float, nullable=True)
 
     def to_dict(self):
         listing = self.__dict__

@@ -27,7 +27,17 @@ const Map: FC = () => {
       allLat.push(lat as number);
       allLng.push(lng as number);
       return (
-          <Marker key={h.MLSNUM} position={{lat, lng}} onClick={() => setFlip(h)}>
+          <Marker key={h.MLSNUM}
+                  position={{lat, lng}}
+                  icon={{
+                      path: 'M64,2A43.88,43.88,0,0,0,20,45.76C20,69.94,53,126,64,126s44-56.06,44-80.24A43.88,43.88,0,0,0,64,2Zm0,57.44A17.32,17.32,0,1,1,81.32,42.12,17.32,17.32,0,0,1,64,59.44Z',
+                      fillColor: h.FLIP_SCORE || 0 > 75 ? '#4caf50' : h.FLIP_SCORE || 0 > 45 ? '#ffc107' : '#dd2c00',
+                      fillOpacity: 1,
+                      strokeColor: '#000',
+                      strokeWeight: 1,
+                      scale: 0.25
+                  }}
+                  onClick={() => setFlip(h)}>
               {flip && flip.MLSNUM === h.MLSNUM && (
                   <InfoWindow>
                       <Home viewHome />
@@ -37,12 +47,12 @@ const Map: FC = () => {
       );
     });
     setMakers(homeMarkers);
-    const newLocation = {
-        lat: allLat.reduce((a,v) => a + v) / allLat.length,
-        lng: allLng.reduce((a,v) => a + v) / allLng.length,
-    };
-    if (map) {
-      map.panTo(newLocation);
+    if(map) {
+        const newLocation = {
+            lat: allLat.filter(lat => !!lat).reduce((a,v) => a + v) / allLat.filter(lat => !!lat).length,
+            lng: allLng.filter(lng => !!lng).reduce((a,v) => a + v) / allLat.filter(lat => !!lat).length,
+        };
+        map.panTo(newLocation);
     }
   }, [flip, setFlip, homes, setMakers, map]);
   return (

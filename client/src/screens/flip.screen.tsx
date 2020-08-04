@@ -9,16 +9,16 @@ import { FlipProbability } from '../components/flip-probability';
 const FlipScreen: FC = () => {
   return (
     <Fragment>
-      <Header title={'Flip Listing'} />
+      <Header title={'Flip Listing'} hideCitySelect />
       <Container>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} style={{marginTop: '1rem'}}>
           <Grid item xs={12} sm={6} md={7}>
-            <Home />
+            <Home largeImage />
             <HomeSpecification />
-            <HomeDescription />
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
             <FlipProbability />
+            <HomeDescription />
           </Grid>
         </Grid>
       </Container>

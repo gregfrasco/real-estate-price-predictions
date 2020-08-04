@@ -9,12 +9,13 @@
   },
   {
     "featureType": "administrative",
+    "elementType": "labels.text",
     "stylers": [
       {
-        "color": "#efebe2"
+        "color": "#636363"
       },
       {
-        "visibility": "off"
+        "visibility": "simplified"
       }
     ]
   },

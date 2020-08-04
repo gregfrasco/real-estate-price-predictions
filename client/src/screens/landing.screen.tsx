@@ -1,14 +1,43 @@
 import React, { FC, Fragment } from 'react';
 import { Header } from '../components/header';
-import { useHistory } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import { Box, Container, Grid } from '@material-ui/core';
+import { LandingText } from '../components/landing-text';
+import { LandingImage} from '../components/landing-image';
+import { FeaturedListingsText } from '../components/featured-listings-text';
+import { FeaturedListingsContainer } from '../components/featured-listings-container';
+
 
 const LandingScreen: FC = () => {
-  const history = useHistory();
   return (
     <Fragment>
-      <Header title={'Flipper'} showIcon />
-      <Button onClick={() => history.push('/homes')}>View Homes</Button>
+      <Header title={'Flipper'} showIcon hideCitySelect/>
+      <Container>
+        <Grid container direction="row" justify="space-between" alignItems="flex-start">
+          <Grid container item xs={12}>
+            <Box width="100%" marginTop={5} marginBottom={3}></Box>
+          </Grid>
+          <Grid container item xs={6}>
+            <Box width="100%" marginTop={5} ml={5} marginBottom={5}>
+              <LandingText />
+            </Box>
+          </Grid>
+          <Grid container item xs={6} spacing={2}>
+            <Box width="100%" marginTop={5} marginBottom={5}>
+              <LandingImage />
+            </Box>
+          </Grid>
+          <Grid container item xs={12} justify="center">
+            <Box width="100%" marginTop={5}>
+              <FeaturedListingsText />
+            </Box>
+          </Grid>
+          <Grid container item xs={12} justify="center">
+            <Box marginTop={5} marginBottom={5} m={3}>
+              <FeaturedListingsContainer />
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
     </Fragment>
   );
 };

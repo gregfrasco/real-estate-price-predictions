@@ -38,8 +38,7 @@ interface Listing {
   HOUSENUM2?: string | null;
   PHOTOURL: string;
   zoMLSNUM?: string | null;
-  location?: {
-    lat: number;
-    lng: number;
-  };
+  lat?: number | null;
+  lng?: number | null;
+  FLIP_SCORE: number;
 }

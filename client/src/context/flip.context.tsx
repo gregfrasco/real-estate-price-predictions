@@ -34,7 +34,10 @@ const FlipProvider: FC = props => {
     if (city) {
       fetch(`api/listings/${city}`)
         .then(res => res.json())
-        .then(data => setHomes(data));
+        .then(data => {
+          data.sort((a: Listing, b: Listing) => b.FLIP_SCORE - a.FLIP_SCORE)
+          setHomes(data)
+        });
     }
   }, [city, setHomes]);
 
